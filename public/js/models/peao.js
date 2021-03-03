@@ -1,20 +1,11 @@
 class Peao extends Peca {
   constructor (scene, x, y, color, squareSize) {
-    var metadeSquareSize = squareSize / 2
-    var positionX = (squareSize / 2) + (squareSize * x)
-    var positionY = (squareSize / 2) + (squareSize * y)
-
-    super(scene, positionX, positionY, `peao-${color}`, squareSize)
+    super(scene, x, y, 'peao', color, squareSize)
 
     this.on('drag', (gameObject, dragX, dragY) => {
       console.log('peao ' + color)
       this.x = dragX
       this.y = dragY
-    })
-
-    this.on('dragend', () => {
-      this.x = (Math.floor(this.x / squareSize) * squareSize) + metadeSquareSize
-      this.y = (Math.floor(this.y / squareSize) * squareSize) + metadeSquareSize
     })
   }
 }

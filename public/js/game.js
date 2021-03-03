@@ -51,17 +51,6 @@ var pieces = [
   casa vazia 12
 */
 
-var initialPositions = [
-  [11, 3, 1, 7, 9, 1, 3, 11],
-  [5, 5, 5, 5, 5, 5, 5, 5],
-  [12, 12, 12, 12, 12, 12, 12, 12],
-  [12, 12, 12, 12, 12, 12, 12, 12],
-  [12, 12, 12, 12, 12, 12, 12, 12],
-  [12, 12, 12, 12, 12, 12, 12, 12],
-  [4, 4, 4, 4, 4, 4, 4, 4],
-  [10, 2, 0, 6, 8, 0, 2, 10]
-]
-
 function preload () {
   pieces.forEach((piece, index) => {
     this.load.image(piece, `sprites/pieces/${piece}.png`)
