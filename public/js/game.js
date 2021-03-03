@@ -66,11 +66,12 @@ function preload () {
   pieces.forEach((piece, index) => {
     this.load.image(piece, `sprites/pieces/${piece}.png`)
   })
-  this.load.audio('piece-move', '')
+  this.load.audio('movendo', 'sons/mexendo.mp3')
 }
 
 function create () {
   var squareSize = 80
+  var movendo = this.sound.add('movendo')
   var whitehouses = this.add.graphics({ fillStyle: { color: 0xFFFFFF } })
   var blackhouses = this.add.graphics({ fillStyle: { color: 22222222 } })
   for(let i = 0; i < 8; i++) {
@@ -81,24 +82,13 @@ function create () {
       } else {
         whitehouses.fillRectShape(rect)
       }
-      console.log(initialPositions[i][j])
       if(initialPositions[i][j] != 12) {
-        var piece = this.add.sprite((squareSize / 2) + (squareSize * j), (squareSize / 2) + (squareSize * i), pieces[initialPositions[i][j]]).setInteractive({ cursor: 'pointer' })
-        this.input.setDraggable(piece)
-        piece.displayWidth = squareSize
-        piece.scaleY = piece.scaleX
+        spawn(this, initialPositions[i][j], squareSize, i, j)
       }
     }
   }
-  this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-    gameObject.x = dragX
-    gameObject.y = dragY
-  })
-  this.input.on('dragend', (pointer, gameObject) => {
-    console.log(Math.round((gameObject.x + 80 / 2) / 80))
-    console.log(Math.round((gameObject.y + 80 / 2) / 80))
-    gameObject.x = (Math.floor(gameObject.x / 80) * 80) + 80 / 2
-    gameObject.y = (Math.floor(gameObject.y / 80) * 80) + 80 / 2
+  this.input.on('dragend', () => {
+    movendo.play()
   })
 }
 
